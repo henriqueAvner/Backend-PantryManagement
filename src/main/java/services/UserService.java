@@ -32,7 +32,7 @@ public class UserService {
     return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
   }
 
-  public User updateUser(@NotEmpty long userId, @NonNull User user) throws UserNotFoundException {
+  public @NonNull User updateUser(@NotEmpty long userId, @NonNull User user) throws UserNotFoundException {
     User findUser = findUserById(userId);
 
     findUser.setEmail(user.getEmail());
@@ -41,14 +41,11 @@ public class UserService {
     userRepository.save(findUser);
 
     return findUser;
-
   }
 
-  public String deleteUser(Long userId) throws UserNotFoundException {
+  public void deleteUser(Long userId) throws UserNotFoundException {
     User userToDelete = findUserById(userId);
     userRepository.delete(userToDelete);
-
-    return "Usuário" + userToDelete.getEmail() + "Deletado";
   }
 
 

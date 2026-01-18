@@ -19,14 +19,14 @@ public class ShoppingList {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private int product_id;
+  private int productId;
   private int quantity;
-  private boolean is_bougth;
+  private boolean isBougth;
 
-  public ShoppingList(Long id, int product_id, int quantity, boolean is_bougth) {
+  public ShoppingList(Long id, int productId, int quantity, boolean isBougth) {
     this.id = id;
-    this.product_id = product_id;
+    this.productId = productId;
     this.quantity = quantity;
-    this.is_bougth = is_bougth;
+    this.isBougth = isBougth;
   }
 }

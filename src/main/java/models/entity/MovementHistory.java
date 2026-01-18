@@ -20,13 +20,13 @@ public class MovementHistory {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private int quantity;
-  private int user_id;
-  private int product_id;
+  private int userId;
+  private int productId;
 
-  public MovementHistory(Long id, int quantity, int user_id, int product_id) {
+  public MovementHistory(Long id, int quantity, int userId, int productId) {
     this.id = id;
     this.quantity = quantity;
-    this.user_id = user_id;
-    this.product_id = product_id;
+    this.userId = userId;
+    this.productId = productId;
   }
 }

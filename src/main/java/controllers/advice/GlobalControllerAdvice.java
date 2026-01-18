@@ -12,7 +12,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalControllerAdvice {
 
   @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<String> handleNotFound(@NotNull NotFoundException exception) {
+  public ResponseEntity<String> handleNotFound( @NonNull NotFoundException exception) {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+  }
+
+  @ExceptionHandler(RuntimeException.class)
+  public ResponseEntity<String> handleRuntimeException (@NonNull RuntimeException exception) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((exception.getMessage()));
+  }
+
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<String> handleException(@NonNull Exception exception){
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+  }
+
+  @ExceptionHandler(Throwable.class)
+  public ResponseEntity<String> handleThrowable(@NonNull Throwable exception) {
+    return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(exception.getMessage());
   }
 }

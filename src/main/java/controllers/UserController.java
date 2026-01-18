@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.DTOs.UserDTO;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import models.entity.User;
@@ -30,43 +31,34 @@ public class UserController {
   public UserController(UserService userService) {
     this.userService = userService;
   }
-
   public ResponseEntity<List<UserDTO>> findAll(){
-
     List<UserDTO> listUsers = userService.findAllUsers()
         .stream()
         .map(UserDTO::fromEntity)
         .toList();
-
     return ResponseEntity.status(HttpStatus.OK).body(listUsers);
-
   }
-
   @GetMapping("/{userId}")
   public ResponseEntity<UserDTO> findById(@PathVariable Long userId) throws UserNotFoundException {
     UserDTO currUser = UserDTO.fromEntity(userService.findUserById(userId));
 
     return ResponseEntity.status(HttpStatus.OK).body(currUser);
   }
-
   @PostMapping
-  public ResponseEntity<UserDTO> createUser(@RequestBody @NotNull User user)
+  public ResponseEntity<UserDTO> createUser(@RequestBody @Valid User user)
       throws UserNotFoundException {
 
     UserDTO createUser = UserDTO.fromEntity(userService.createUser(user));
     return ResponseEntity.status(HttpStatus.CREATED).body(createUser);
   }
-
   @PutMapping("/{userId}")
-  public ResponseEntity<UserDTO> updateUser(@PathVariable Long userId, @RequestBody User user)
+  public ResponseEntity<UserDTO> updateUser(@PathVariable Long userId, @RequestBody @Valid User user)
       throws UserNotFoundException {
 
     UserDTO updatedUser = UserDTO.fromEntity(userService.updateUser(userId, user));
 
     return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
-
   }
-
   @DeleteMapping("/{userId}")
   public ResponseEntity<String> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
     UserDTO findUser = findById(userId).getBody();

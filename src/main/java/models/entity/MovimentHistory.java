@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MovementHistory {
+public class MovimentHistory {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class MovementHistory {
   private int userId;
   private int productId;
 
-  public MovementHistory(Long id, int quantity, int userId, int productId) {
+  public MovimentHistory(Long id, int quantity, int userId, int productId) {
     this.id = id;
     this.quantity = quantity;
     this.userId = userId;
